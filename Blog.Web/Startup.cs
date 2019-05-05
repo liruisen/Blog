@@ -42,6 +42,8 @@ namespace Blog.Web
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = Path.Combine(basePath, "Blog.Web.xml");//配置的xml文件名
                 c.IncludeXmlComments(xmlPath, true); //默认的第二个参数是false，这个是controller的注释，记得修改
+                var xmlmodelPath = Path.Combine(basePath, "Blog.Model.xml");
+                c.IncludeXmlComments(xmlmodelPath);
             });
             #endregion
         }

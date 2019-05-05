@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Blog.Model;
 
 namespace Blog.Web.Controllers
 {
@@ -39,8 +40,9 @@ namespace Blog.Web.Controllers
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Love Post([FromBody] Love value)
         {
+            return value;
         }
 
         // PUT api/values/5

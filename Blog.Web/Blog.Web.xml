@@ -17,7 +17,7 @@
             <param name="id">id</param>
             <returns></returns>
         </member>
-        <member name="M:Blog.Web.Controllers.ValuesController.Post(System.String)">
+        <member name="M:Blog.Web.Controllers.ValuesController.Post(Blog.Model.Love)">
             <summary>
             添加数据
             </summary>
