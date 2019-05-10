@@ -31,6 +31,7 @@ namespace Blog.Web.Controllers
         /// <param name="id">id</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<string> Get(int id)
         {
             return "value";
