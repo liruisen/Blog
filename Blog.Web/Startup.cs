@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.Swagger;
+using Blog.Web.AuthHelper.OverWrite;
 
 namespace Blog.Web
 {
@@ -39,11 +41,25 @@ namespace Blog.Web
                     TermsOfService = "None",
                     Contact = new Swashbuckle.AspNetCore.Swagger.Contact { Name = "Blog.Web", Email = "liruisen1024@gmail.com", Url = "http://superforest.ml" }
                 });
+                #region 读取XML文件
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = Path.Combine(basePath, "Blog.Web.xml");//配置的xml文件名
                 c.IncludeXmlComments(xmlPath, true); //默认的第二个参数是false，这个是controller的注释，记得修改
                 var xmlmodelPath = Path.Combine(basePath, "Blog.Model.xml");
                 c.IncludeXmlComments(xmlmodelPath);
+                #endregion
+                #region Token绑定到ConfigureServices
+                //添加Header验证信息
+                var security = new Dictionary<string, IEnumerable<string>> { { "Blog", new string[] { } }, };
+                c.AddSecurityRequirement(security);
+                c.AddSecurityDefinition("Blog", new ApiKeyScheme
+                {
+                    Description = "JWT授权（数据将在请求头中进行传输）直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    Name = "Authorization",//JTW默认的参数名称
+                    In = "header",//jwt默认放在Authorization信息的位置（请求头中）
+                    Type = "apiKey"
+                });
+                #endregion
             });
             #endregion
         }
@@ -75,6 +91,7 @@ namespace Blog.Web
                 // 强制实施 HTTPS 在 ASP.NET Core，配合 app.UseHttpsRedirection
                 //app.UseHsts();
             }
+            app.UseJwtTokenAuth();
             app.UseMvc();
         }
     }

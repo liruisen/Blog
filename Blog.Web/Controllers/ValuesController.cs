@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Blog.Model;
+using Blog.Web.AuthHelper.OverWrite;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Web.Controllers
 {
@@ -40,6 +42,7 @@ namespace Blog.Web.Controllers
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public Love Post([FromBody] Love value)
         {
             return value;
@@ -64,6 +67,38 @@ namespace Blog.Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+        /// <summary>
+        /// JWT颁发测试
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        [HttpGet("getjwt")]
+        public object GetJwtStr(string name,string pass)
+        {
+            string jwtStr = string.Empty;
+            bool suc = false;
+            var user =  "Admin";
+            if (user!=null)
+            {
+                TokenModelJwt tokenModel = new TokenModelJwt()
+                {
+                    Uid = 1,
+                    Role = user
+                };
+                jwtStr = JwtHelper.IssueJwt(tokenModel);
+                suc = true;
+            }
+            else
+            {
+                jwtStr = "login fail";
+            }
+            return Ok(new
+            {
+                success = suc,
+                token = jwtStr
+            });
         }
     }
 }

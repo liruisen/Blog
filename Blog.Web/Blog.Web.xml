@@ -4,6 +4,21 @@
         <name>Blog.Web</name>
     </assembly>
     <members>
+        <member name="P:Blog.Web.AuthHelper.OverWrite.TokenModelJwt.Uid">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Blog.Web.AuthHelper.OverWrite.TokenModelJwt.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:Blog.Web.AuthHelper.OverWrite.TokenModelJwt.Work">
+            <summary>
+            职能
+            </summary>
+        </member>
         <member name="M:Blog.Web.Controllers.ValuesController.Get">
             <summary>
             获取数据
@@ -35,6 +50,14 @@
             删除数据
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="M:Blog.Web.Controllers.ValuesController.GetJwtStr(System.String,System.String)">
+            <summary>
+            JWT颁发测试
+            </summary>
+            <param name="name"></param>
+            <param name="pass"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

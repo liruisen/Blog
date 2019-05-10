@@ -18,7 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Common\Blog.Common.csproj" />
     <ProjectReference Include="..\Blog.Model\Blog.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AuthHelper\Policys\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
